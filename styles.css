@@ -9,6 +9,7 @@ body {
 
 .dice-container {
     text-align: center;
+    display: flex;
 }
 
 .dice {
@@ -21,6 +22,8 @@ body {
     border: 2px solid #000;
     border-radius: 10px;
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     position: relative;
 }
 
@@ -32,8 +35,25 @@ body {
     place-self: center;
 }
 
+.dice.inactive {
+    transform: translateY(-20px);
+    background-color: #cccccc; /* Greyed out color */
+    opacity: 0.5; /* Slightly transparent */
+}
+
+.dice.active {
+    transform: translateY(0);
+    background-color: #fff;
+    opacity: 1;
+}
+
 .dot.hidden {
     display: none;
+}
+
+.roll-button {
+    text-align: center;
+    display: inline;    
 }
 
 button {
