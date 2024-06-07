@@ -3,39 +3,65 @@ let active2 = true;
 let active3 = true;
 let active4 = true;
 let active5 = true;
+var dice1Num;
+var dice2Num;
+var dice3Num;
+var dice4Num;
+var dice5Num;
+var rolls = [];
+
 
 document.addEventListener('DOMContentLoaded', function() {
+
+    dice1Num = Math.floor(Math.random() * 6) + 1;
+    dice2Num = Math.floor(Math.random() * 6) + 1;
+    dice3Num = Math.floor(Math.random() * 6) + 1;
+    dice4Num = Math.floor(Math.random() * 6) + 1;
+    dice5Num = Math.floor(Math.random() * 6) + 1;
+
     const dice1 = document.getElementById('dice1');
-    updateDice(dice1, Math.floor(Math.random() * 6) + 1); // Initialize the dice with the value 1
+    updateDice(dice1, dice1Num);
     const dice2 = document.getElementById('dice2');
-    updateDice(dice2, Math.floor(Math.random() * 6) + 1);
+    updateDice(dice2, dice2Num);
     const dice3 = document.getElementById('dice3');
-    updateDice(dice3, Math.floor(Math.random() * 6) + 1);
+    updateDice(dice3, dice3Num);
     const dice4 = document.getElementById('dice4');
-    updateDice(dice4, Math.floor(Math.random() * 6) + 1);
+    updateDice(dice4, dice4Num);
     const dice5 = document.getElementById('dice5');
-    updateDice(dice5, Math.floor(Math.random() * 6) + 1);
+    updateDice(dice5, dice5Num);
+    rolls = [dice1Num, dice2Num, dice3Num, dice4Num, dice5Num];
 
     document.getElementById('rollButton').addEventListener('click', function() {
-        if (active1) {
-            const result1 = Math.floor(Math.random() * 6) + 1;
-            updateDice(dice1, result1);
-        }
-        if (active2) {
-            const result2 = Math.floor(Math.random() * 6) + 1;
-            updateDice(dice2, result2);
-        }
-        if (active3) {
-            const result3 = Math.floor(Math.random() * 6) + 1;
-            updateDice(dice3, result3);
-        }
-        if (active4) {
-            const result4 = Math.floor(Math.random() * 6) + 1;
-            updateDice(dice4, result4);
-        }
-        if (active5) {
-            const result5 = Math.floor(Math.random() * 6) + 1;
-            updateDice(dice5, result5);
+
+        if (! turnOver) {
+
+            if (active1) {
+                dice1Num = Math.floor(Math.random() * 6) + 1;
+                const result1 = dice1Num;
+                updateDice(dice1, result1);
+            }
+            if (active2) {
+                dice2Num = Math.floor(Math.random() * 6) + 1;
+                const result2 = dice2Num;
+                updateDice(dice2, result2);
+            }
+            if (active3) {
+                dice3Num = Math.floor(Math.random() * 6) + 1;
+                const result3 = dice3Num;
+                updateDice(dice3, result3);
+            }
+            if (active4) {
+                dice4Num = Math.floor(Math.random() * 6) + 1;
+                const result4 = dice4Num;
+                updateDice(dice4, result4);
+            }
+            if (active5) {
+                dice5Num = Math.floor(Math.random() * 6) + 1;
+                const result5 = dice5Num;
+                updateDice(dice5, result5);
+            }
+            rolls = [dice1Num, dice2Num, dice3Num, dice4Num, dice5Num];
+
         }
     });
 
