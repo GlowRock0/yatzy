@@ -249,6 +249,7 @@ document.getElementById('YatzyID').addEventListener('click', function() {
 });
 
 function resetTurn() {
+
     active['1'] = true;
     active['2'] = true;
     active['3'] = true;
@@ -261,6 +262,7 @@ function resetTurn() {
     updateDiceActivity(dice5, active['5']);
     currRoll = 0;
     noRollsLeft = false;
+    document.getElementById('roll-counter').textContent = "Current Roll: " + currRoll;
 }
 
 function resetCardOnNewTurn() {
@@ -300,17 +302,17 @@ function checkIfGameFinished() {
             total += calculateBonus();
             document.getElementById('TotalID').textContent = total;
 
-            document.getElementById('gameOver').style.display = 'block';
+            document.getElementById('gameOver').style.visibility = 'visible';
             document.getElementById('gameOver').textContent = "Game Over! Your total score is: " + total;
-            document.getElementById('restartGame').style.display = 'block';
+            document.getElementById('restartGame').style.visibility = 'visible';
     }
 }
 
 
 document.getElementById('restartGame').addEventListener('click', function() {
     if (gameOver) {
-        document.getElementById('gameOver').style.display = 'none';
-        document.getElementById('restartGame').style.display = 'none';
+        document.getElementById('gameOver').style.visibility = 'hidden';
+        document.getElementById('restartGame').style.visibility = 'hidden';
         total = 0;
 
         for (let key in selectedScores) {               //reset selectedScores

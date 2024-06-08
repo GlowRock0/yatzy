@@ -3,25 +3,30 @@ var noRollsLeft = false;
 
 function countRoll() {
     setTimeout(() => {
-        currRoll++;
-        if (currRoll == 3) {
-            noRollsLeft = true;
+        if (active['1'] || active['2'] || active['3'] || active['4'] || active['5']) {
+            if (currRoll != 3) {
+                currRoll++;
+            }
+            document.getElementById('roll-counter').textContent = "Current Roll: " + currRoll;
+            if (currRoll == 3) {
+                noRollsLeft = true;
+            }
+            if (!selectedScores['ones']) { calculateOnesScore(); }
+            if (!selectedScores['twos']) { calculateTwosScore(); }
+            if (!selectedScores['threes']) { calculateThreesScore(); }
+            if (!selectedScores['fours']) { calculateFoursScore(); }
+            if (!selectedScores['fives']) { calculateFivesScore(); }
+            if (!selectedScores['sixes']) { calculateSixesScore(); }
+            if (!selectedScores['onePair']) { calculateOnePairScore(); }
+            if (!selectedScores['twoPairs']) { calculateTwoPairsScore(); }
+            if (!selectedScores['threeOfAKind']) { calculateThreeOfAKindScore(); }
+            if (!selectedScores['fourOfAKind']) { calculateFourOfAKindScore(); }
+            if (!selectedScores['smallStraight']) { calculateSmallStraightScore(); }
+            if (!selectedScores['largeStraight']) { calculateLargeStraightScore(); }
+            if (!selectedScores['fullHouse']) { calculateFullHouseScore(); }
+            if (!selectedScores['chance']) { calculateChanceScore(); }
+            if (!selectedScores['yatzy']) { calculateYatzyScore(); }
         }
-        if (!selectedScores['ones']) { calculateOnesScore(); }
-        if (!selectedScores['twos']) { calculateTwosScore(); }
-        if (!selectedScores['threes']) { calculateThreesScore(); }
-        if (!selectedScores['fours']) { calculateFoursScore(); }
-        if (!selectedScores['fives']) { calculateFivesScore(); }
-        if (!selectedScores['sixes']) { calculateSixesScore(); }
-        if (!selectedScores['onePair']) { calculateOnePairScore(); }
-        if (!selectedScores['twoPairs']) { calculateTwoPairsScore(); }
-        if (!selectedScores['threeOfAKind']) { calculateThreeOfAKindScore(); }
-        if (!selectedScores['fourOfAKind']) { calculateFourOfAKindScore(); }
-        if (!selectedScores['smallStraight']) { calculateSmallStraightScore(); }
-        if (!selectedScores['largeStraight']) { calculateLargeStraightScore(); }
-        if (!selectedScores['fullHouse']) { calculateFullHouseScore(); }
-        if (!selectedScores['chance']) { calculateChanceScore(); }
-        if (!selectedScores['yatzy']) { calculateYatzyScore(); }
     }, 10);
 }
 

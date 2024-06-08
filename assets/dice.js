@@ -17,6 +17,8 @@ var rolls = [];
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    document.getElementById('roll-counter').textContent = "Current Roll: " + currRoll;
+
     diceNum['1'] = Math.floor(Math.random() * 6) + 1;
     diceNum['2'] = Math.floor(Math.random() * 6) + 1;
     diceNum['3'] = Math.floor(Math.random() * 6) + 1;
