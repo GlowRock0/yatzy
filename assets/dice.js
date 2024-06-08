@@ -1,103 +1,125 @@
-let active1 = true;
-let active2 = true;
-let active3 = true;
-let active4 = true;
-let active5 = true;
-var dice1Num;
-var dice2Num;
-var dice3Num;
-var dice4Num;
-var dice5Num;
+var active = {
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+    5: true
+}
+var diceNum = {
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0
+}
 var rolls = [];
 
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    dice1Num = Math.floor(Math.random() * 6) + 1;
-    dice2Num = Math.floor(Math.random() * 6) + 1;
-    dice3Num = Math.floor(Math.random() * 6) + 1;
-    dice4Num = Math.floor(Math.random() * 6) + 1;
-    dice5Num = Math.floor(Math.random() * 6) + 1;
+    diceNum['1'] = Math.floor(Math.random() * 6) + 1;
+    diceNum['2'] = Math.floor(Math.random() * 6) + 1;
+    diceNum['3'] = Math.floor(Math.random() * 6) + 1;
+    diceNum['4'] = Math.floor(Math.random() * 6) + 1;
+    diceNum['5'] = Math.floor(Math.random() * 6) + 1;
 
     const dice1 = document.getElementById('dice1');
-    updateDice(dice1, dice1Num);
+    updateDice(dice1, diceNum['1']);
     const dice2 = document.getElementById('dice2');
-    updateDice(dice2, dice2Num);
+    updateDice(dice2, diceNum['2']);
     const dice3 = document.getElementById('dice3');
-    updateDice(dice3, dice3Num);
+    updateDice(dice3, diceNum['3']);
     const dice4 = document.getElementById('dice4');
-    updateDice(dice4, dice4Num);
+    updateDice(dice4, diceNum['4']);
     const dice5 = document.getElementById('dice5');
-    updateDice(dice5, dice5Num);
-    rolls = [dice1Num, dice2Num, dice3Num, dice4Num, dice5Num];
+    updateDice(dice5, diceNum['5']);
+    rolls = [diceNum['1'], diceNum['2'], diceNum['3'], diceNum['4'], diceNum['5']];
 
     document.getElementById('rollButton').addEventListener('click', function() {
 
-        if (! turnOver) {
+        if (! noRollsLeft && ! gameOver) {
 
-            if (active1) {
-                dice1Num = Math.floor(Math.random() * 6) + 1;
-                const result1 = dice1Num;
+            if (active['1']) {
+
+                diceNum['1'] = Math.floor(Math.random() * 6) + 1;
+                const result1 = diceNum['1'];
                 updateDice(dice1, result1);
             }
-            if (active2) {
-                dice2Num = Math.floor(Math.random() * 6) + 1;
-                const result2 = dice2Num;
+            if (active['2']) {
+
+                diceNum['2'] = Math.floor(Math.random() * 6) + 1;
+                const result2 = diceNum['2'];
                 updateDice(dice2, result2);
             }
-            if (active3) {
-                dice3Num = Math.floor(Math.random() * 6) + 1;
-                const result3 = dice3Num;
+            if (active['3']) {
+
+                diceNum['3'] = Math.floor(Math.random() * 6) + 1;
+                const result3 = diceNum['3'];
                 updateDice(dice3, result3);
             }
-            if (active4) {
-                dice4Num = Math.floor(Math.random() * 6) + 1;
-                const result4 = dice4Num;
+            if (active['4']) {
+
+                diceNum['4'] = Math.floor(Math.random() * 6) + 1;
+                const result4 = diceNum['4'];
                 updateDice(dice4, result4);
             }
-            if (active5) {
-                dice5Num = Math.floor(Math.random() * 6) + 1;
-                const result5 = dice5Num;
+            if (active['5']) {
+
+                diceNum['5'] = Math.floor(Math.random() * 6) + 1;
+                const result5 = diceNum['5'];
                 updateDice(dice5, result5);
             }
-            rolls = [dice1Num, dice2Num, dice3Num, dice4Num, dice5Num];
-
+            rolls = [diceNum['1'], diceNum['2'], diceNum['3'], diceNum['4'], diceNum['5']];
         }
     });
 
     dice1.addEventListener('click', function() {
-        active1 = !active1;
-        updateDiceActivity(dice1, active1);
+
+        if (currRoll != 0 && ! gameOver) {
+            active['1'] = !active['1'];
+            updateDiceActivity(dice1, active['1']);
+        }
     });
 
     dice2.addEventListener('click', function() {
-        active2 = !active2;
-        updateDiceActivity(dice2, active2);
+
+        if (currRoll != 0 && ! gameOver) {
+            active['2'] = !active['2'];
+            updateDiceActivity(dice2, active['2']);
+        }
     });
 
     dice3.addEventListener('click', function() {
-        active3 = !active3;
-        updateDiceActivity(dice3, active3);
+
+        if (currRoll != 0 && ! gameOver) {
+            active['3'] = !active['3'];
+            updateDiceActivity(dice3, active['3']);
+        }
     });
 
     dice4.addEventListener('click', function() {
-        active4 = !active4;
-        updateDiceActivity(dice4, active4);
+
+        if (currRoll != 0 && ! gameOver) {
+            active['4'] = !active['4'];
+            updateDiceActivity(dice4, active['4']);
+        }
     });
 
     dice5.addEventListener('click', function() {
-        active5 = !active5;
-        updateDiceActivity(dice5, active5);
+
+        if (currRoll != 0 && ! gameOver) {
+            active['5'] = !active['5'];
+            updateDiceActivity(dice5, active['5']);
+        }
     });
 });
 
 function updateDice(dice, number) {
-    // Clear existing dots
+
     while (dice.firstChild) {
         dice.removeChild(dice.firstChild);
     }
 
-    // Create dots based on the rolled number
     const dotPositions = getDotPositions(number);
     for (let i = 0; i < 9; i++) {
         const dot = document.createElement('div');
@@ -112,6 +134,7 @@ function updateDice(dice, number) {
 }
 
 function getDotPositions(number) {
+
     switch (number) {
         case 1:
             return [4];
@@ -131,13 +154,12 @@ function getDotPositions(number) {
 }
 
 function updateDiceActivity(dice, isActive) {
+    
     if (isActive) {
         dice.classList.remove('inactive');
         dice.classList.add('active');
-        console.log("Dice is active");
     } else {
         dice.classList.remove('active');
         dice.classList.add('inactive');
-        console.log("Dice is inactive");
     }
 }
